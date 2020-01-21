@@ -1,6 +1,7 @@
 package main
 
 import (
+	complexpb "baquiax.me/protobufers-go/src/complex"
 	enumpb "baquiax.me/protobufers-go/src/enum_example"
 	simplepb "baquiax.me/protobufers-go/src/simple"
 	"fmt"
@@ -104,9 +105,35 @@ func doEnum() {
 	fmt.Println(ep)
 }
 
+func doComplex() {
+	cm := complexpb.ComplexMessage{
+		OneDummy: &complexpb.DummyMessage{
+			Id:   1,
+			Name: "Dummy message",
+		},
+		MultipleDummy: []*complexpb.DummyMessage{
+			{
+				Id:   1,
+				Name: "Dummy message",
+			},
+			{
+				Id:   2,
+				Name: "Second message",
+			},
+			{
+				Id:   3,
+				Name: "Third message",
+			},
+		},
+	}
+
+	fmt.Println(cm)
+}
+
 func main() {
 	sm := doSimple()
 	readAndWriteDemo(sm)
 	jsonDemo(sm)
 	doEnum()
+	doComplex()
 }
