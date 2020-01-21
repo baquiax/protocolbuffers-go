@@ -3,6 +3,7 @@ package main
 import (
 	complexpb "baquiax.me/protobufers-go/src/complex"
 	enumpb "baquiax.me/protobufers-go/src/enum_example"
+	exercise1 "baquiax.me/protobufers-go/src/exercise-1"
 	simplepb "baquiax.me/protobufers-go/src/simple"
 	"fmt"
 	"github.com/golang/protobuf/jsonpb"
@@ -131,9 +132,10 @@ func doComplex() {
 }
 
 func main() {
-	sm := doSimple()
-	readAndWriteDemo(sm)
-	jsonDemo(sm)
-	doEnum()
-	doComplex()
+	// sm := doSimple()
+	// readAndWriteDemo(sm)
+	// jsonDemo(sm)
+	// doEnum()
+	// doComplex()
+	exercise1.DoExercise1()
 }
