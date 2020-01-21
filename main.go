@@ -1,6 +1,7 @@
 package main
 
 import (
+	enumpb "baquiax.me/protobufers-go/src/enum_example"
 	simplepb "baquiax.me/protobufers-go/src/simple"
 	"fmt"
 	"github.com/golang/protobuf/jsonpb"
@@ -93,8 +94,19 @@ func jsonDemo(pb proto.Message) {
 	fmt.Println("Sucess created", sm2)
 }
 
+func doEnum() {
+	ep := enumpb.EnumMessage{
+		Id:           42,
+		DayOfTheWeek: enumpb.DayOfTheWeek_THURSDAY,
+	}
+
+	ep.DayOfTheWeek = enumpb.DayOfTheWeek_MONDAY
+	fmt.Println(ep)
+}
+
 func main() {
 	sm := doSimple()
 	readAndWriteDemo(sm)
 	jsonDemo(sm)
+	doEnum()
 }
