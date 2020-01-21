@@ -3,6 +3,7 @@ package main
 import (
 	simplepb "baquiax.me/protobufers-go/src/simple"
 	"fmt"
+	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
 	"io/ioutil"
 	"log"
@@ -65,7 +66,35 @@ func readAndWriteDemo(sm proto.Message) {
 	fmt.Println(sm2)
 }
 
+func toJSON(pb proto.Message) string {
+	marshallers := jsonpb.Marshaler{}
+	out, err := marshallers.MarshalToString(pb)
+	if err != nil {
+		log.Fatalln("Can't convert JSON", err)
+		return ""
+	}
+
+	return out
+}
+
+func fromJSON(in string, pb proto.Message) {
+	err := jsonpb.UnmarshalString(in, pb)
+	if err != nil {
+		log.Fatalln("Can't unmarshall string to poto.Message")
+	}
+}
+
+func jsonDemo(pb proto.Message) {
+	smAsString := toJSON(pb)
+	fmt.Println(smAsString)
+
+	sm2 := &simplepb.SimpleMessage{}
+	fromJSON(smAsString, sm2)
+	fmt.Println("Sucess created", sm2)
+}
+
 func main() {
 	sm := doSimple()
 	readAndWriteDemo(sm)
+	jsonDemo(sm)
 }
